@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MiniApp.Data;
 
 #nullable disable
 
@@ -21,7 +22,7 @@ namespace MiniApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Event", b =>
+            modelBuilder.Entity("MiniApp.Models.Event", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,6 +98,9 @@ namespace MiniApp.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("QuantityAvailable")
+                        .HasColumnType("int");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -108,7 +112,7 @@ namespace MiniApp.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Event", b =>
+            modelBuilder.Entity("MiniApp.Models.Event", b =>
                 {
                     b.HasOne("MiniApp.Models.Organizer", "Organizer")
                         .WithMany("Events")
@@ -121,7 +125,7 @@ namespace MiniApp.Migrations
 
             modelBuilder.Entity("MiniApp.Models.Ticket", b =>
                 {
-                    b.HasOne("Event", "Event")
+                    b.HasOne("MiniApp.Models.Event", "Event")
                         .WithMany("Tickets")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -130,7 +134,7 @@ namespace MiniApp.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("Event", b =>
+            modelBuilder.Entity("MiniApp.Models.Event", b =>
                 {
                     b.Navigation("Tickets");
                 });

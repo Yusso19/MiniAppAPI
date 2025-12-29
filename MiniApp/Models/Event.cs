@@ -1,16 +1,19 @@
 ﻿using MiniApp.Models;
 
-public class Event
+namespace MiniApp.Models
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string? Description { get; set; }
-    public DateTime Date { get; set; }
-    public string Location { get; set; }
-    public string? BannerImageUrl { get; set; }
+    public class Event
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string? Description { get; set; }
+        public DateTime Date { get; set; }
+        public string Location { get; set; }
+        public string? BannerImageUrl { get; set; }
 
-    public int OrganizerId { get; set; }
-    public Organizer Organizer { get; set; }
+        public int OrganizerId { get; set; }
+        public Organizer Organizer { get; set; }
 
-    public ICollection<Ticket> Tickets { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
+    }
 }
