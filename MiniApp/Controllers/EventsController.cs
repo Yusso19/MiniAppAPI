@@ -59,7 +59,10 @@ namespace MiniApp.Controllers
         [HttpGet("{eventId}/tickets")]
         public async Task<IActionResult> GetTickets(int eventId)
         {
-            var tickets = await _context.Tickets.Where(t => t.EventId == eventId).ToListAsync();
+            var tickets = await _context.Tickets
+                .Include(t => t.Event)
+                .Where(t => t.EventId == eventId)
+                .ToListAsync();
             return Ok(_mapper.Map<List<TicketDto>>(tickets));
         }
 

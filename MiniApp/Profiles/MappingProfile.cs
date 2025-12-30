@@ -10,7 +10,10 @@ namespace MiniApp.Profiles
         {
             CreateMap<Event, EventDto>().ReverseMap();
             CreateMap<Organizer, OrganizerDto>().ReverseMap();
-            CreateMap<Ticket, TicketDto>().ReverseMap();
+            CreateMap<Ticket, TicketDto>()
+                .ForMember(dest => dest.EventName, opt => opt.MapFrom(src => src.Event.Title))
+                .ReverseMap()
+                .ForMember(dest => dest.Event, opt => opt.Ignore());
         }
     }
 }
